@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pickle
 import os
@@ -5,7 +6,7 @@ from groq import Groq
 from langchain.embeddings import HuggingFaceEmbeddings, SentenceTransformerEmbeddings
 # from langchain.embeddings import HuggingFaceEmbeddings, SentenceTransformerEmbeddings
 from langchain.vectorstores import FAISS
-
+import openai
 import langchain
 from langchain.document_loaders import PyPDFDirectoryLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -55,16 +56,16 @@ description = st.chat_input("ask me anything")
 
 
 llm = ChatGroq(
-    model_name="llama3-8b-8192",  
+    model_name="qwen-qwq-32b",  
     # model_name="llama-3.1-8b-instant",
-    temperature=0.3,
-    max_tokens = 300
+    temperature=0.1,
+    max_tokens = 1000
 )
 
 
 # Create a simple prompt
 prompt = ChatPromptTemplate.from_messages([
-        ('system',"""
+    ('system',"""
     [System Instruction]
     You are a friendly, professional cci global assistant. Your purpose is to answer user questions using facts from our knowledge base and provide concise, formal responses.
 
@@ -76,21 +77,8 @@ prompt = ChatPromptTemplate.from_messages([
     2. If cci global question, answer from context: {context}. If no context, say "Insufficient info."
     3. Always prioritize chat history.
     4. Keep your answers well within 300 words always
-    5. If user asks to contact cci global send them mail to cci@global.com and ask for their email,phone and name
+    5. If user asks to contact cci global ask them to mail at cci@global.com and don't share any other cci global contact also ask for their email,phone and name after checking in context if previously provided or not
     """),
-    # ('system',"""
-    # [System Instruction]
-    # You are a friendly, professional cci global assistant. Your purpose is to answer user questions using facts from our knowledge base and provide concise, formal responses.
-
-    # [Chat History]
-    # {chat_history}
-
-    # [Output Instructions]
-    # 1. If question is not related to cci global,continue casual chat.
-    # 2. If cci global question, answer from context: {context}. If no context, say "Insufficient info."
-    # 3. Always prioritize chat history.
-    # 4. Keep your answers well within 300 words always
-    # """),
     # ("system","""
     # Act as a course guidance expert. Provide information on courses, offer career choice guidance by asking up to 3 questions to determine suitable course among Data Analyst, Machine Learning Engineer, or Software Engineer, and consider chat history to provide contextual answers
     # """),
@@ -142,6 +130,7 @@ if description:
 
     ans = parse_product(description,context,hist_str)
     # ans = 'poiuytrewqgyhujkjhgfd'
+    ans = ans[ans.find("</think>")+len("</think>"):]
 
     st.session_state.messages.append({"role": "assistant", "content": ans})
 
