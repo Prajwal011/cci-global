@@ -1,0 +1,8 @@
+sentence-transformers
+langchain
+langchain-groq
+streamlit
+pyngrok
+langchain-community
+faiss-cpu
+duckduckgo-search
