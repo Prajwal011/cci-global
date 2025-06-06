@@ -1,4 +1,4 @@
-streamlit as st
+import streamlit as st
 import pickle
 import os
 from groq import Groq
