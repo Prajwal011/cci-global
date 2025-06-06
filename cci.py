@@ -77,7 +77,7 @@ prompt = ChatPromptTemplate.from_messages([
     3. Always prioritize chat history.
     4. Keep your answers well within 300 words always
     5. If user asks to contact cci global send them mail to cci@global.com and ask for their email,phone and name
-    """)
+    """),
     # ('system',"""
     # [System Instruction]
     # You are a friendly, professional cci global assistant. Your purpose is to answer user questions using facts from our knowledge base and provide concise, formal responses.
