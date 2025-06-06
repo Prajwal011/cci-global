@@ -6,7 +6,7 @@ from groq import Groq
 from langchain.embeddings import HuggingFaceEmbeddings, SentenceTransformerEmbeddings
 # from langchain.embeddings import HuggingFaceEmbeddings, SentenceTransformerEmbeddings
 from langchain.vectorstores import FAISS
-import openai
+
 import langchain
 from langchain.document_loaders import PyPDFDirectoryLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
