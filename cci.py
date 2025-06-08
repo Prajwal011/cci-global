@@ -21,7 +21,7 @@ import os
 
 import streamlit as st
 
-os.environ['GROQ_API_KEY'] = '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'
+os.environ['GROQ_API_KEY'] = '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'
 KB = 'cci_kb'
 # Initialize Groq LLM
 # # # llm = ChatGroq(
